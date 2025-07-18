@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zocvz Hangout Support</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1e293b;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #60a5fa;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    section {
+      background-color: #1e293b;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #93c5fd;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      background-color: #334155;
+      color: #f1f5f9;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .discord-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .discord-link a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Zocvz Hangout Support</h1>
+    <p>Need help or want to join the team? Start below.</p>
+  </header>
+
+  <main>
+
+    <!-- Support Form -->
+    <section>
+      <h2>✉️ Support Help</h2>
+      <form id="supportForm">
+        <label for="supportUsername">Your Discord Username</label>
+        <input type="text" id="supportUsername" required>
+
+        <label for="supportQuestion">Your Question</label>
+        <textarea id="supportQuestion" rows="4" required></textarea>
+
+        <button type="submit">Send to Support</button>
+      </form>
+    </section>
+
+    <!-- Mod Application -->
+    <section>
+      <h2>🛡️ Apply for Moderator</h2>
+      <form id="modForm">
+        <label for="modUsername">Your Discord Username</label>
+        <input type="text" id="modUsername" required>
+
+        <label for="modWhy">Why do you want to be a mod?</label>
+        <textarea id="modWhy" rows="3" required></textarea>
+
+        <label for="modDo">What will you do as a mod?</label>
+        <textarea id="modDo" rows="3" required></textarea>
+
+        <button type="submit">Apply for Mod</button>
+      </form>
+    </section>
+
+    <!-- Admin Application -->
+    <section>
+      <h2>🛠️ Apply for Admin</h2>
+      <form id="adminForm">
+        <label for="adminUsername">Your Discord Username</label>
+        <input type="text" id="adminUsername" required>
+
+        <label for="adminWhy">Why do you want to be an admin?</label>
+        <textarea id="adminWhy" rows="3" required></textarea>
+
+        <label for="adminDo">What will you do as an admin?</label>
+        <textarea id="adminDo" rows="3" required></textarea>
+
+        <button type="submit">Apply for Admin</button>
+      </form>
+    </section>
+
+    <!-- Discord Invite -->
+    <div class="discord-link">
+      <p>Join our server: <a href="https://discord.gg/5XEAsZNdZR" target="_blank">Click Here</a></p>
+    </div>
+
+  </main>
+
+  <script>
+    // Support Form Handler
+    document.getElementById('supportForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('supportUsername').value;
+      const question = document.getElementById('supportQuestion').value;
+
+      const payload = {
+        content: `**Support Request**\n**Username:** ${username}\n**Question:** ${question}`
+      };
+
+      await fetch("https://discord.com/api/webhooks/1395809933894619136/JnMgj__YTZQVlR8CQUeLbYRhip9sZ6Rs_OjhmgA7Hp8hFIGgfq6qaUBAW--172j2zwv1", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Support request sent!");
+      e.target.reset();
+    });
+
+    // Mod Application
+    document.getElementById('modForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('modUsername').value;
+      const why = document.getElementById('modWhy').value;
+      const what = document.getElementById('modDo').value;
+
+      const payload = {
+        content: `**Mod Application**\n**Username:** ${username}\n**Why Mod:** ${why}\n**What Will Do:** ${what}`
+      };
+
+      await fetch("https://discord.com/api/webhooks/1395811002045562990/bqBRODScA-uNqLS1e7xqLlKoYJwyppmlh7z9aw-uPlVBVEKPDYAiD7LBk98YI49lS8D6", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Moderator application sent!");
+      e.target.reset();
+    });
+
+    // Admin Application
+    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('adminUsername').value;
+      const why = document.getElementById('adminWhy').value;
+      const what = document.getElementById('adminDo').value;
+
+      const payload = {
+        content: `**Admin Application**\n**Username:** ${username}\n**Why Admin:** ${why}\n**What Will Do:** ${what}`
+      };
+
+      await fetch("https://discord.com/api/webhooks/1395811002045562990/bqBRODScA-uNqLS1e7xqLlKoYJwyppmlh7z9aw-uPlVBVEKPDYAiD7LBk98YI49lS8D6", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Admin application sent!");
+      e.target.reset();
+    });
+  </script>
+
+</body>
+</html>
